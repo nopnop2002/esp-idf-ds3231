@@ -21,7 +21,7 @@ You have to set these config value using menuconfig.
 
 ![config_ds3231-2](https://user-images.githubusercontent.com/6020549/59557292-346e5300-9011-11e9-9070-fe281eed0398.jpg)
 
-you have to set gpio & NTP Server using menuconfig.   
+You have to set gpio & NTP Server using menuconfig.   
 
 ![config-ds3231-11](https://user-images.githubusercontent.com/6020549/59557295-4bad4080-9011-11e9-96dc-b42702929542.jpg)
 
