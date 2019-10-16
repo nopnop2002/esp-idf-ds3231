@@ -10,8 +10,6 @@ make menuconfig
 make flash
 ```
 
-
-
 ---
 
 # Set Clock Mode   
@@ -65,4 +63,12 @@ you have to change mode using menuconfig.
 # Time difference of 1 month later.   
 
 ![ds3231-1month](https://user-images.githubusercontent.com/6020549/61294194-3f82f180-a810-11e9-866a-5af73427cf12.jpg)
+
+---
+
+# References
+
+https://github.com/nopnop2002/esp-idf-ds1302
+
+https://github.com/nopnop2002/esp-idf-ds1307
 
