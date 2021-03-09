@@ -10,7 +10,6 @@ make menuconfig
 make flash
 ```
 
----
 
 # Set Clock Mode   
 
@@ -27,7 +26,6 @@ You have to set gpio & NTP Server using menuconfig.
 
 ![config-ds3231-12](https://user-images.githubusercontent.com/6020549/59557296-4fd95e00-9011-11e9-842c-7c81469244af.jpg)
 
----
 
 # Get Clock Mode   
 
@@ -40,7 +38,6 @@ You have to change mode using menuconfig.
 
 ![ds3231-13](https://user-images.githubusercontent.com/6020549/59557303-697aa580-9011-11e9-81ef-09c0b28ed5a9.jpg)
 
----
 
 # Get the time difference of NTP and RTC   
 
@@ -54,7 +51,6 @@ You have to change mode using menuconfig.
 
 ![ds3231-14](https://user-images.githubusercontent.com/6020549/59557305-7f886600-9011-11e9-8b24-cf3a251e4bce.jpg)
 
----
 
 # Time difference of 1 week later.   
 
@@ -64,7 +60,6 @@ You have to change mode using menuconfig.
 
 ![ds3231-1month](https://user-images.githubusercontent.com/6020549/61294194-3f82f180-a810-11e9-866a-5af73427cf12.jpg)
 
----
 
 # References
 
@@ -72,3 +67,4 @@ https://github.com/nopnop2002/esp-idf-ds1302
 
 https://github.com/nopnop2002/esp-idf-ds1307
 
+https://github.com/nopnop2002/esp-idf-pcf8563
