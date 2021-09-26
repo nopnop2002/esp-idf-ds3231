@@ -18,7 +18,7 @@ idf.py flash
 |SCL|--|GPIO15(*1)|
 |SDA|--|GPIO16(*1)|
 |GND|--|GND|
-|VCC|--|5V|
+|VCC|--|3.3V|
 
 (*1) You can change using menuconfig.   
 
