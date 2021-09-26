@@ -3,13 +3,24 @@ DS3231 RTC Driver for esp-idf
 
 I forked from [here](https://github.com/UncleRus/esp-idf-lib/tree/master/components/ds3231).   
 
+# Installation
 ```
 git clone https://github.com/nopnop2002/esp-idf-ds3231
 cd esp-idf-ds3231
-make menuconfig
-make flash
+idf.py menuconfig
+idf.py flash
 ```
 
+# Wireing  
+
+|DS3231||ESP32|
+|:-:|:-:|:-:|
+|SCL|--|GPIO15(*1)|
+|SDA|--|GPIO16(*1)|
+|GND|--|GND|
+|VCC|--|5V|
+
+(*1) You can change using menuconfig.   
 
 # Set Clock Mode   
 
