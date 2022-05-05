@@ -87,9 +87,9 @@ static bool obtain_time(void)
 void setClock(void *pvParameters)
 {
     // obtain time over NTP
-    ESP_LOGI(pcTaskGetTaskName(0), "Connecting to WiFi and getting time over NTP.");
+    ESP_LOGI(pcTaskGetName(0), "Connecting to WiFi and getting time over NTP.");
     if(!obtain_time()) {
-        ESP_LOGE(pcTaskGetTaskName(0), "Fail to getting time over NTP.");
+        ESP_LOGE(pcTaskGetName(0), "Fail to getting time over NTP.");
         while (1) { vTaskDelay(1); }
     }
 
@@ -101,22 +101,22 @@ void setClock(void *pvParameters)
     now = now + (CONFIG_TIMEZONE*60*60);
     localtime_r(&now, &timeinfo);
     strftime(strftime_buf, sizeof(strftime_buf), "%c", &timeinfo);
-    ESP_LOGI(pcTaskGetTaskName(0), "The current date/time is: %s", strftime_buf);
+    ESP_LOGI(pcTaskGetName(0), "The current date/time is: %s", strftime_buf);
 
     // Initialize RTC
     i2c_dev_t dev;
     if (ds3231_init_desc(&dev, I2C_NUM_0, CONFIG_SDA_GPIO, CONFIG_SCL_GPIO) != ESP_OK) {
-        ESP_LOGE(pcTaskGetTaskName(0), "Could not init device descriptor.");
+        ESP_LOGE(pcTaskGetName(0), "Could not init device descriptor.");
         while (1) { vTaskDelay(1); }
     }
 
-    ESP_LOGD(pcTaskGetTaskName(0), "timeinfo.tm_sec=%d",timeinfo.tm_sec);
-    ESP_LOGD(pcTaskGetTaskName(0), "timeinfo.tm_min=%d",timeinfo.tm_min);
-    ESP_LOGD(pcTaskGetTaskName(0), "timeinfo.tm_hour=%d",timeinfo.tm_hour);
-    ESP_LOGD(pcTaskGetTaskName(0), "timeinfo.tm_wday=%d",timeinfo.tm_wday);
-    ESP_LOGD(pcTaskGetTaskName(0), "timeinfo.tm_mday=%d",timeinfo.tm_mday);
-    ESP_LOGD(pcTaskGetTaskName(0), "timeinfo.tm_mon=%d",timeinfo.tm_mon);
-    ESP_LOGD(pcTaskGetTaskName(0), "timeinfo.tm_year=%d",timeinfo.tm_year);
+    ESP_LOGD(pcTaskGetName(0), "timeinfo.tm_sec=%d",timeinfo.tm_sec);
+    ESP_LOGD(pcTaskGetName(0), "timeinfo.tm_min=%d",timeinfo.tm_min);
+    ESP_LOGD(pcTaskGetName(0), "timeinfo.tm_hour=%d",timeinfo.tm_hour);
+    ESP_LOGD(pcTaskGetName(0), "timeinfo.tm_wday=%d",timeinfo.tm_wday);
+    ESP_LOGD(pcTaskGetName(0), "timeinfo.tm_mday=%d",timeinfo.tm_mday);
+    ESP_LOGD(pcTaskGetName(0), "timeinfo.tm_mon=%d",timeinfo.tm_mon);
+    ESP_LOGD(pcTaskGetName(0), "timeinfo.tm_year=%d",timeinfo.tm_year);
 
     struct tm time = {
         .tm_year = timeinfo.tm_year + 1900,
@@ -128,14 +128,14 @@ void setClock(void *pvParameters)
     };
 
     if (ds3231_set_time(&dev, &time) != ESP_OK) {
-        ESP_LOGE(pcTaskGetTaskName(0), "Could not set time.");
+        ESP_LOGE(pcTaskGetName(0), "Could not set time.");
         while (1) { vTaskDelay(1); }
     }
-    ESP_LOGI(pcTaskGetTaskName(0), "Set initial date time done");
+    ESP_LOGI(pcTaskGetName(0), "Set initial date time done");
 
     // goto deep sleep
     const int deep_sleep_sec = 10;
-    ESP_LOGI(pcTaskGetTaskName(0), "Entering deep sleep for %d seconds", deep_sleep_sec);
+    ESP_LOGI(pcTaskGetName(0), "Entering deep sleep for %d seconds", deep_sleep_sec);
     esp_deep_sleep(1000000LL * deep_sleep_sec);
 }
 
@@ -144,7 +144,7 @@ void getClock(void *pvParameters)
     // Initialize RTC
     i2c_dev_t dev;
     if (ds3231_init_desc(&dev, I2C_NUM_0, CONFIG_SDA_GPIO, CONFIG_SCL_GPIO) != ESP_OK) {
-        ESP_LOGE(pcTaskGetTaskName(0), "Could not init device descriptor.");
+        ESP_LOGE(pcTaskGetName(0), "Could not init device descriptor.");
         while (1) { vTaskDelay(1); }
     }
 
@@ -157,16 +157,16 @@ void getClock(void *pvParameters)
         struct tm rtcinfo;
 
         if (ds3231_get_temp_float(&dev, &temp) != ESP_OK) {
-            ESP_LOGE(pcTaskGetTaskName(0), "Could not get temperature.");
+            ESP_LOGE(pcTaskGetName(0), "Could not get temperature.");
             while (1) { vTaskDelay(1); }
         }
 
         if (ds3231_get_time(&dev, &rtcinfo) != ESP_OK) {
-            ESP_LOGE(pcTaskGetTaskName(0), "Could not get time.");
+            ESP_LOGE(pcTaskGetName(0), "Could not get time.");
             while (1) { vTaskDelay(1); }
         }
 
-        ESP_LOGI(pcTaskGetTaskName(0), "%04d-%02d-%02d %02d:%02d:%02d, %.2f deg Cel", 
+        ESP_LOGI(pcTaskGetName(0), "%04d-%02d-%02d %02d:%02d:%02d, %.2f deg Cel", 
             rtcinfo.tm_year, rtcinfo.tm_mon + 1,
             rtcinfo.tm_mday, rtcinfo.tm_hour, rtcinfo.tm_min, rtcinfo.tm_sec, temp);
 	vTaskDelayUntil(&xLastWakeTime, 1000);
@@ -176,9 +176,9 @@ void getClock(void *pvParameters)
 void diffClock(void *pvParameters)
 {
     // obtain time over NTP
-    ESP_LOGI(pcTaskGetTaskName(0), "Connecting to WiFi and getting time over NTP.");
+    ESP_LOGI(pcTaskGetName(0), "Connecting to WiFi and getting time over NTP.");
     if(!obtain_time()) {
-        ESP_LOGE(pcTaskGetTaskName(0), "Fail to getting time over NTP.");
+        ESP_LOGE(pcTaskGetName(0), "Fail to getting time over NTP.");
         while (1) { vTaskDelay(1); }
     }
 
@@ -190,24 +190,24 @@ void diffClock(void *pvParameters)
     now = now + (CONFIG_TIMEZONE*60*60);
     localtime_r(&now, &timeinfo);
     strftime(strftime_buf, sizeof(strftime_buf), "%m-%d-%y %H:%M:%S", &timeinfo);
-    ESP_LOGI(pcTaskGetTaskName(0), "NTP date/time is: %s", strftime_buf);
+    ESP_LOGI(pcTaskGetName(0), "NTP date/time is: %s", strftime_buf);
 
     // Initialize RTC
     i2c_dev_t dev;
     if (ds3231_init_desc(&dev, I2C_NUM_0, CONFIG_SDA_GPIO, CONFIG_SCL_GPIO) != ESP_OK) {
-        ESP_LOGE(pcTaskGetTaskName(0), "Could not init device descriptor.");
+        ESP_LOGE(pcTaskGetName(0), "Could not init device descriptor.");
         while (1) { vTaskDelay(1); }
     }
 
     // Get RTC date and time
     struct tm rtcinfo;
     if (ds3231_get_time(&dev, &rtcinfo) != ESP_OK) {
-        ESP_LOGE(pcTaskGetTaskName(0), "Could not get time.");
+        ESP_LOGE(pcTaskGetName(0), "Could not get time.");
         while (1) { vTaskDelay(1); }
     }
     rtcinfo.tm_year = rtcinfo.tm_year - 1900;
     rtcinfo.tm_isdst = -1;
-    ESP_LOGD(pcTaskGetTaskName(0), "%04d-%02d-%02d %02d:%02d:%02d", 
+    ESP_LOGD(pcTaskGetName(0), "%04d-%02d-%02d %02d:%02d:%02d", 
         rtcinfo.tm_year, rtcinfo.tm_mon + 1,
         rtcinfo.tm_mday, rtcinfo.tm_hour, rtcinfo.tm_min, rtcinfo.tm_sec);
 
@@ -215,11 +215,11 @@ void diffClock(void *pvParameters)
     time_t rtcnow = mktime(&rtcinfo);
     localtime_r(&rtcnow, &timeinfo);
     strftime(strftime_buf, sizeof(strftime_buf), "%m-%d-%y %H:%M:%S", &timeinfo);
-    ESP_LOGI(pcTaskGetTaskName(0), "RTC date/time is: %s", strftime_buf);
+    ESP_LOGI(pcTaskGetName(0), "RTC date/time is: %s", strftime_buf);
 
     // Get the time difference
     double x = difftime(rtcnow, now);
-    ESP_LOGI(pcTaskGetTaskName(0), "Time difference is: %f", x);
+    ESP_LOGI(pcTaskGetName(0), "Time difference is: %f", x);
     
     while(1) {
         vTaskDelay(1000);
