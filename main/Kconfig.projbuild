@@ -20,7 +20,7 @@ menu "DS3231 Configuration"
 
     config TIMEZONE
         int "Your TimeZone"
-        range 0 23
+        range -23 23
         default 0
         help
             Your local timezone.
