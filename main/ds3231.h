@@ -1,5 +1,7 @@
-#ifndef MAIN_DS3231_H_
-#define MAIN_DS3231_H_
+#pragma once
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #include <time.h>
 #include <stdbool.h>
@@ -150,5 +152,6 @@ esp_err_t ds3231_enable_alarm_ints(i2c_dev_t *dev, ds3231_alarm_t alarms);
  */
 esp_err_t ds3231_disable_alarm_ints(i2c_dev_t *dev, ds3231_alarm_t alarms);
 
-#endif /* MAIN_DS3231_H_ */
-
+#ifdef __cplusplus
+}
+#endif

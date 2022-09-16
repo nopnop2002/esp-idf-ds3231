@@ -1,5 +1,8 @@
-#ifndef MAIN_I2CDEV_H_
-#define MAIN_I2CDEV_H_
+#pragma once
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #include "driver/i2c.h"
 
@@ -28,4 +31,7 @@ inline esp_err_t i2c_dev_write_reg(const i2c_dev_t *dev, uint8_t reg,
 {
     return i2c_dev_write(dev, &reg, 1, out_data, out_size);
 }
-#endif /* MAIN_I2CDEV_H_ */
+
+#ifdef __cplusplus
+}
+#endif
