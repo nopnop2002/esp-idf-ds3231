@@ -11,7 +11,10 @@ idf.py menuconfig
 idf.py flash
 ```
 
-# Wireing  
+Please note that we remove i2cdev files and we are adding this externally with the purpouse of not repeating code.
+Check the original fork to grab them. 
+
+# Wiring  
 
 |DS3231||ESP32|
 |:-:|:-:|:-:|
