@@ -34,7 +34,7 @@ esp_err_t ds3231_init_desc(i2c_dev_t *dev, i2c_port_t port, gpio_num_t sda_gpio,
     dev->sda_io_num = sda_gpio;
     dev->scl_io_num = scl_gpio;
     dev->clk_speed = I2C_FREQ_HZ;
-    return i2c_master_init(port, sda_gpio, scl_gpio);
+    return i2c_master_init(port, sda_gpio, scl_gpio, I2C_FREQ_HZ);
 }
 
 esp_err_t ds3231_set_time(i2c_dev_t *dev, struct tm *time)
