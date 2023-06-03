@@ -19,6 +19,14 @@ typedef enum {
     DS3231_ALARM_BOTH     //!< Both alarms
 } ds3231_alarm_t;
 
+typedef enum
+{
+    DS3231_1HZ          = 0x00,
+    DS3231_1024HZ       = 0x01,
+    DS3231_4096HZ       = 0x02,
+    DS3231_8192HZ       = 0x03
+} ds3231_sqw_t;
+
 /**
  * First alarm rate
  */
@@ -50,7 +58,6 @@ typedef enum {
 #define DS3231_STAT_ALARM_2    0x02
 #define DS3231_STAT_ALARM_1    0x01
 
-#define DS3231_CTRL_OSCILLATOR    0x80
 #define DS3231_CTRL_SQUAREWAVE_BB 0x40
 #define DS3231_CTRL_TEMPCONV      0x20
 #define DS3231_CTRL_ALARM_INTS    0x04
@@ -140,6 +147,12 @@ esp_err_t ds3231_set_alarm(i2c_dev_t *dev, ds3231_alarm_t alarms, struct tm *tim
  */
 esp_err_t ds3231_enable_alarm_ints(i2c_dev_t *dev, ds3231_alarm_t alarms);
 
+/*
+ * @param dev Device descriptor
+ * @param alarms Alarms
+ * @return ESP_OK to indicate success
+ */
+esp_err_t ds3231_enable_sqw(i2c_dev_t *dev, ds3231_sqw_t mode);
 
 /**
  * @brief Disable alarm interrupts

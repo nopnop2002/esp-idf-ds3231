@@ -218,6 +218,13 @@ esp_err_t ds3231_enable_alarm_ints(i2c_dev_t *dev, ds3231_alarm_t alarms)
     return ESP_OK;
 }
 
+esp_err_t ds3231_enable_sqw(i2c_dev_t *dev, ds3231_sqw_t mode) {
+    CHECK_ARG(dev);
+    // Set SQW mode: Leaving the rest of config untouched
+    ds3231_set_flag(dev, DS3231_ADDR_CONTROL, (mode << 3), DS3231_REPLACE); 
+    return ESP_OK;
+}
+
 esp_err_t ds3231_disable_alarm_ints(i2c_dev_t *dev, ds3231_alarm_t alarms)
 {
     CHECK_ARG(dev);
