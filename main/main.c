@@ -16,12 +16,6 @@
 
 #include "ds3231.h"
 
-#if (ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 0, 0))
-#define sntp_setoperatingmode esp_sntp_setoperatingmode
-#define sntp_setservername esp_sntp_setservername
-#define sntp_init esp_sntp_init
-#endif
-
 #if CONFIG_SET_CLOCK
 	#define NTP_SERVER CONFIG_NTP_SERVER
 #endif
@@ -45,12 +39,12 @@ void time_sync_notification_cb(struct timeval *tv)
 static void initialize_sntp(void)
 {
 	ESP_LOGI(TAG, "Initializing SNTP");
-	sntp_setoperatingmode(SNTP_OPMODE_POLL);
-	//sntp_setservername(0, "pool.ntp.org");
+	esp_sntp_setoperatingmode(SNTP_OPMODE_POLL);
+	//esp_sntp_setservername(0, "pool.ntp.org");
 	ESP_LOGI(TAG, "Your NTP Server is %s", NTP_SERVER);
-	sntp_setservername(0, NTP_SERVER);
+	esp_sntp_setservername(0, NTP_SERVER);
 	sntp_set_time_sync_notification_cb(time_sync_notification_cb);
-	sntp_init();
+	esp_sntp_init();
 }
 
 static bool obtain_time(void)
@@ -166,7 +160,7 @@ void getClock(void *pvParameters)
 		ESP_LOGI(pcTaskGetName(0), "%04d-%02d-%02d %02d:%02d:%02d, %.2f deg Cel", 
 			rtcinfo.tm_year, rtcinfo.tm_mon + 1,
 			rtcinfo.tm_mday, rtcinfo.tm_hour, rtcinfo.tm_min, rtcinfo.tm_sec, temp);
-	vTaskDelayUntil(&xLastWakeTime, 1000);
+		vTaskDelayUntil(&xLastWakeTime, 1000);
 	}
 }
 
