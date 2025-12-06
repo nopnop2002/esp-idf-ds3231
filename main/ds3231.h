@@ -3,7 +3,6 @@
 
 #include <time.h>
 #include <stdbool.h>
-#include "driver/i2c.h"
 
 #include "i2cdev.h"
 
