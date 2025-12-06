@@ -1,10 +1,17 @@
 # esp-idf-ds3231
 DS3231 RTC Driver for esp-idf
 
-I forked from [here](https://github.com/UncleRus/esp-idf-lib/tree/master/components/ds3231).   
+# Software requirements
+ESP-IDF V5.0 or later.   
+ESP-IDF V4.4 release branch reached EOL in July 2024.   
+ESP-IDF V5.1 is required when using ESP32-C6.   
+
+__Note for ESP-IDF V5.2.__   
+A new i2c driver is now available in ESP-IDF V5.2.   
+Under ESP-IDF V5.2 or later, this project uses a new i2c driver.   
 
 # Installation
-```
+```Shell
 git clone https://github.com/nopnop2002/esp-idf-ds3231
 cd esp-idf-ds3231
 idf.py menuconfig
@@ -27,15 +34,13 @@ You can change GPIO using menuconfig.
 This mode set RTC initial value using NTP time Server.   
 You have to set these config value using menuconfig.   
 
-![config-ds3231-1](https://user-images.githubusercontent.com/6020549/59557293-346e5300-9011-11e9-9106-6256bd5c8a7e.jpg)
-
-![config_ds3231-2](https://user-images.githubusercontent.com/6020549/59557292-346e5300-9011-11e9-9070-fe281eed0398.jpg)
+![Image](https://github.com/user-attachments/assets/cc69f8fb-bf6f-415c-b65d-3eb072efdd9c)
+![Image](https://github.com/user-attachments/assets/0d1e38a2-1d8c-4e3e-b478-d4736c0b9134)
 
 You have to set gpio & NTP Server using menuconfig.   
 
-![config-ds3231-11](https://user-images.githubusercontent.com/6020549/59557295-4bad4080-9011-11e9-96dc-b42702929542.jpg)
-
-![config-ds3231-12](https://user-images.githubusercontent.com/6020549/59557296-4fd95e00-9011-11e9-842c-7c81469244af.jpg)
+![Image](https://github.com/user-attachments/assets/7d1a3359-2de7-4139-b3f7-4f14e9b6b23d)
+![Image](https://github.com/user-attachments/assets/376d2562-7517-4e11-a893-fd37c090f7b8)
 
 
 # Get Clock Mode   
@@ -43,10 +48,8 @@ You have to set gpio & NTP Server using menuconfig.
 This mode take out the time from a RTC clock.   
 You have to change mode using menuconfig.   
 
-![config-ds3231-11](https://user-images.githubusercontent.com/6020549/59557295-4bad4080-9011-11e9-96dc-b42702929542.jpg)
-
-![config-ds3231-13](https://user-images.githubusercontent.com/6020549/59557300-5ec01080-9011-11e9-9ca2-94067ab8df28.jpg)
-
+![Image](https://github.com/user-attachments/assets/7d1a3359-2de7-4139-b3f7-4f14e9b6b23d)
+![Image](https://github.com/user-attachments/assets/f264591d-90fb-434d-9b1e-3c9fb8dc02ab)
 ![ds3231-13](https://user-images.githubusercontent.com/6020549/59557303-697aa580-9011-11e9-81ef-09c0b28ed5a9.jpg)
 
 
@@ -56,10 +59,8 @@ This mode get time over NTP, and take out the time from a RTC clock.
 Calculate time difference of NTP and RTC.   
 You have to change mode using menuconfig.   
 
-![config-ds3231-11](https://user-images.githubusercontent.com/6020549/59557295-4bad4080-9011-11e9-96dc-b42702929542.jpg)
-
-![config-ds3231-14](https://user-images.githubusercontent.com/6020549/59557304-77302b00-9011-11e9-8694-5c9fa47f6352.jpg)
-
+![Image](https://github.com/user-attachments/assets/7d1a3359-2de7-4139-b3f7-4f14e9b6b23d)
+![Image](https://github.com/user-attachments/assets/9c058d9e-50de-4e84-a9cd-0b62da2aa440)
 ![ds3231-14](https://user-images.githubusercontent.com/6020549/59557305-7f886600-9011-11e9-8b24-cf3a251e4bce.jpg)
 
 
